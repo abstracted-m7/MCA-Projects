@@ -10,25 +10,28 @@ import util.DBConnection;
 public class StudentDAO {
 
     public void syncToDatabase(List<Student> students) {
-        try {
+
+        String deleteQuery = "DELETE FROM student";
+        String insertQuery = "INSERT INTO student VALUES (?, ?, ?)";
+
+        try (
             Connection con = DBConnection.getConnection();
+            PreparedStatement deleteStmt = con.prepareStatement(deleteQuery);
+            PreparedStatement insertStmt = con.prepareStatement(insertQuery);
+        ) {
 
-            // Clear table (Full Sync)
-            PreparedStatement delete = con.prepareStatement("DELETE FROM student");
-            delete.executeUpdate();
+            // Step 1: Clear old data
+            deleteStmt.executeUpdate();
 
-            // Insert all records
+            // Step 2: Insert new data
             for (Student s : students) {
-                PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO student VALUES (?, ?, ?)"
-                );
-                ps.setInt(1, s.getId());
-                ps.setString(2, s.getName());
-                ps.setInt(3, s.getAge());
-                ps.executeUpdate();
+                insertStmt.setInt(1, s.getId());
+                insertStmt.setString(2, s.getName());
+                insertStmt.setInt(3, s.getAge());
+                insertStmt.executeUpdate();
             }
 
-            System.out.println("Data Synced Successfully!");
+            System.out.println("✅ Data Synced Successfully!");
 
         } catch (Exception e) {
             e.printStackTrace();
