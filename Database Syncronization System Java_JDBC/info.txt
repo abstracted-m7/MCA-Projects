@@ -1,0 +1,17 @@
+how to create maven project:
+
+`Bash`:
+mvn archetype:generate -DgroupId=com.example -DartifactId=CollectionSyncProject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+`Add Dependency`:
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>8.3.0</version>
+</dependency>
+
+
+`how Run`:
+cd CollectionSyncProject
+mvn compile
+mvn exec:java -Dexec.mainClass="com.example.MainApp"

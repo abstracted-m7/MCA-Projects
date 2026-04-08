@@ -1,0 +1,75 @@
+`task`
+ Develop a Java application that synchronizes in-memory collection data with a database. The program should store records initially in Java collection objects, allow modifications at runtime, and then persist the updated data into a database table using JDBC. This application should demonstrate how collections act as temporary data holders before permanent storage.
+
+`Let's Begin`
+
+# Title:  In-Memory Collection to Database Synchronization System (Java + JDBC)
+
+#Project Overview
+
+1. System Architecture:
+            User Input
+                ↓
+            Java Collection (ArrayList)
+                ↓
+            Modify Data (CRUD)
+                ↓
+            JDBC Layer
+                ↓
+            Database (MySQL / PostgreSQL)
+
+2. Technologies Used
+    Java Core, OOP
+    JDBC API
+    MySQL
+    VS CODE
+
+
+3. Modules
+
+i. Model Class (Entity)
+        Represents a record (e.g., Student)
+        class Student {
+            int id;
+            String name;
+            int age;
+        }
+
+ii. Collection Layer (Temporary Storage)
+        Use ArrayList<Student>
+        Store data in memory
+
+iii. Service Layer (Business Logic)
+        Handles:
+        Add data
+        Update data
+        Delete data
+        View data
+
+iv. DAO Layer (Database Access)
+        Handles:
+        Insert into DB
+        Update DB
+        Delete from DB
+
+
+v. JDBC Connectivity Module
+        Establish connection
+        Execute SQL queries
+        Close resources
+
+
+4. Folder Structure
+CollectionSyncProject\src\main\java\com\example/
+│
+├── model/
+│   └── Student.java
+│
+├── services/
+│   └── StudentService.java
+│
+├── util/
+│   └── DBConnection.java
+│
+└── MainApp.java
+
