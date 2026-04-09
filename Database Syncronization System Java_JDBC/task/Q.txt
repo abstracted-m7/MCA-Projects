@@ -8,21 +8,26 @@
 #Project Overview
 
 1. System Architecture:
-            User Input
-                ↓
-            Java Collection (ArrayList)
-                ↓
-            Modify Data (CRUD)
-                ↓
-            JDBC Layer
-                ↓
-            Database (MySQL / PostgreSQL)
+User Interface Module
+        │
+        ▼
+Service Layer (Business Logic)
+        │
+        ├── Collection Layer (ArrayList)
+        │
+        └── Database Access Layer (DAO)
+                    │
+                    ▼
+            JDBC Connectivity
+                    │
+                    ▼
+                MySQL Database
 
 2. Technologies Used
     Java Core, OOP
     JDBC API
-    MySQL
-    VS CODE
+    phpMySQL
+    VS CODE (Maven)
 
 
 3. Modules
@@ -72,4 +77,35 @@ CollectionSyncProject\src\main\java\com\example/
 │   └── DBConnection.java
 │
 └── MainApp.java
+
+5.Database (phpMyAdmin):
+Open phpMyAdmin:
+Run Sql:
+CREATE DATABASE collectiondb;
+
+USE collectiondb;
+
+CREATE TABLE students(
+id INT PRIMARY KEY,
+name VARCHAR(50),
+department VARCHAR(50)
+);
+
+6. how to create maven project:
+
+`Bash`:
+mvn archetype:generate -DgroupId=com.example -DartifactId=CollectionSyncProject -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+`Add Dependency`:
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>8.3.0</version>
+</dependency>
+
+
+`how Run`:
+cd CollectionSyncProject
+mvn compile
+mvn exec:java -Dexec.mainClass="com.example.MainApp"
 
